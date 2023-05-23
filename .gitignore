@@ -1,0 +1,6 @@
+ignore/
+*.pyc
+src/__pycache__/
+src/util/__pycache__/
+/venv/
+/.idea
