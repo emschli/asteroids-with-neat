@@ -1,6 +1,8 @@
 import random
+import sys
 
 import pygame
+from pygame.locals import *
 
 from badies import Rock, Debris
 from ship import Ship
@@ -16,9 +18,9 @@ class Environment:
     WIDTH = 1024
     HEIGHT = 768
 
-    def __init__(self, rendering):
+    def __init__(self, rendering, windowed=True):
         self.rendering = rendering
-        self.stage = Stage(rendering, 'Atari Asteroids', (self.WIDTH, self.HEIGHT))
+        self.stage = Stage(rendering, windowed, 'Atari Asteroids', (self.WIDTH, self.HEIGHT))
 
         self.numRocks = 3
         self.rockList = []
@@ -52,8 +54,14 @@ class Environment:
 
     def render(self):
         if self.rendering:
-            for _ in pygame.event.get():
-                pass
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    sys.exit(0)
+                elif event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        sys.exit(0)
+                else:
+                    pass
             self.clock.tick(60)
             self.stage.screen.fill((10, 10, 10))
             self.stage.drawSprites()

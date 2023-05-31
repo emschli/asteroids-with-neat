@@ -25,7 +25,7 @@ from pygame.locals import *
 class Stage:
 
     # Set up the PyGame surface
-    def __init__(self, rendering, caption, dimensions=None):
+    def __init__(self, rendering, windowed, caption, dimensions=None):
         self.spriteList = []
         self.width = dimensions[0]
         self.height = dimensions[1]
@@ -39,10 +39,11 @@ class Stage:
             if dimensions == None:
                 dimensions = pygame.display.list_modes()[0]
 
-            pygame.display.set_mode(dimensions, FULLSCREEN)
-            pygame.mouse.set_visible(False)
-
-            # pygame.display.set_mode(dimensions)
+            if windowed:
+                pygame.display.set_mode(dimensions)
+            else:
+                pygame.display.set_mode(dimensions, FULLSCREEN)
+                pygame.mouse.set_visible(False)
 
             pygame.display.set_caption(caption)
             self.screen = pygame.display.get_surface()

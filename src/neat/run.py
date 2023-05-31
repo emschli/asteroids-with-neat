@@ -4,8 +4,9 @@ from environment import Environment
 
 NUMBER_OF_ACTIONS = 4
 RENDERING = False
+WINDOWED_MODE = True
 
-env = Environment(RENDERING)
+env = Environment(RENDERING, WINDOWED_MODE)
 ship, rocks, done = env.reset()
 
 while not done:
