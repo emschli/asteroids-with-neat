@@ -48,7 +48,7 @@ class Asteroids():
     explodingTtl = 180
 
     def __init__(self):
-        self.stage = Stage('Atari Asteroids', (1024, 768))
+        self.stage = Stage(True, 'Atari Asteroids', (1024, 768))
         self.paused = False
         self.showingFPS = False
         self.frameAdvance = False
@@ -106,7 +106,7 @@ class Asteroids():
             position = Vector2d(random.randrange(-10, 10),
                                 random.randrange(-10, 10))
 
-            newRock = Rock(self.stage, position, Rock.largeRockType)
+            newRock = Rock(position, Rock.largeRockType)
             self.stage.addSprite(newRock)
             self.rockList.append(newRock)
 
@@ -142,7 +142,7 @@ class Asteroids():
             self.stage.screen.fill((10, 10, 10))
             self.stage.moveSprites()
             self.stage.drawSprites()
-            self.doSaucerLogic()
+            # self.doSaucerLogic()
             self.displayScore()
             if self.showingFPS:
                 self.displayFps()  # for debug
@@ -350,7 +350,7 @@ class Asteroids():
                     # new rocks
                     for _ in range(0, 2):
                         position = Vector2d(rock.position.x, rock.position.y)
-                        newRock = Rock(self.stage, position, newRockType)
+                        newRock = Rock(position, newRockType)
                         self.stage.addSprite(newRock)
                         self.rockList.append(newRock)
 

@@ -37,7 +37,7 @@ class Rock(VectorSprite):
     rockShape = 1    
     
     # Create the rock polygon to the given scale
-    def __init__(self, stage, position, rockType):
+    def __init__(self, position, rockType):
         
         scale = Rock.scales[rockType]
         velocity = Rock.velocities[rockType]                

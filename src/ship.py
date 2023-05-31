@@ -81,7 +81,7 @@ class Ship(Shooter):
         self.changeVelocity(dx, dy)
 
     def decreaseThrust(self):
-        stopSound("thrust")
+        # stopSound("thrust")
         if (self.heading.x == 0 and self.heading.y == 0):
             return
 
@@ -143,7 +143,7 @@ class Ship(Shooter):
             heading = Vector2d(vx, vy)
             Shooter.fireBullet(self, heading, self.bulletTtl,
                                self.bulletVelocity)
-            playSound("fire")
+            # playSound("fire")
 
     #
     def enterHyperSpace(self):
