@@ -46,16 +46,21 @@ class Environment:
         if len(self.rockList) == 0:
             self.levelUp()
 
-        return self.ship, self.rockList, done
+        self.render()
+
+        return self.ship, self.rockList, self.score, done
 
     def render(self):
-        for _ in pygame.event.get():
-            pass
-
-        self.clock.tick(60)
-        self.stage.screen.fill((10, 10, 10))
-        self.stage.drawSprites()
-        pygame.display.flip()
+        if self.rendering:
+            for _ in pygame.event.get():
+                pass
+            self.clock.tick(60)
+            self.stage.screen.fill((10, 10, 10))
+            self.stage.drawSprites()
+            self.displayScore()
+            pygame.display.flip()
+        else:
+            self.stage.drawSprites()
 
     def initialiseGame(self):
         [self.stage.removeSprite(sprite)
@@ -78,17 +83,12 @@ class Environment:
             self.rockList.append(newRock)
 
     def createNewShip(self):
-        new_ship = Ship(self.stage)
-
-        if self.rendering:
-            if self.ship:
-                [self.stage.spriteList.remove(debris)
-                 for debris in self.ship.shipDebrisList]
-            self.stage.addSprite(new_ship.thrustJet)
-            self.stage.addSprite(new_ship)
-        self.ship = new_ship
-
-
+        if self.ship:
+            [self.stage.spriteList.remove(debris)
+             for debris in self.ship.shipDebrisList]
+        self.ship = Ship(self.stage)
+        self.stage.addSprite(self.ship.thrustJet)
+        self.stage.addSprite(self.ship)
 
     def processInput(self, action):
         self.ship.thrustJet.accelerating = False
@@ -175,5 +175,9 @@ class Environment:
         self.numRocks += 1
         self.createRocks(self.numRocks)
 
-
-
+    def displayScore(self):
+        font1 = pygame.font.Font('../../res/Hyperspace.otf', 30)
+        scoreStr = str("%02d" % self.score)
+        scoreText = font1.render(scoreStr, True, (200, 200, 200))
+        scoreTextRect = scoreText.get_rect(centerx=100, centery=45)
+        self.stage.screen.blit(scoreText, scoreTextRect)

@@ -25,11 +25,12 @@ from pygame.locals import *
 class Stage:
 
     # Set up the PyGame surface
-    def __init__(self, rendering,  caption, dimensions=None):
+    def __init__(self, rendering, caption, dimensions=None):
         self.spriteList = []
         self.width = dimensions[0]
         self.height = dimensions[1]
         self.showBoundingBoxes = False
+        self.screen = pygame.Surface(dimensions)
 
         if rendering:
             pygame.init()
