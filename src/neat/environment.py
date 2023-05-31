@@ -104,6 +104,7 @@ class Environment:
         if action == 3:
             self.ship.fireBullet()
         elif action == 2:
+            self.ship.increaseThrust()
             self.ship.thrustJet.accelerating = True
         elif action == 1:
             self.ship.rotateRight()

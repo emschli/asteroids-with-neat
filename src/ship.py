@@ -72,7 +72,7 @@ class Ship(Shooter):
         self.thrustJet.angle -= self.turnAngle
 
     def increaseThrust(self):
-        playSoundContinuous("thrust")
+        # playSoundContinuous("thrust")
         if math.hypot(self.heading.x, self.heading.y) > self.maxVelocity:
             return
 
