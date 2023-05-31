@@ -1,16 +1,15 @@
-import random
-
 from environment import Environment
+from agent import Agent
 
-NUMBER_OF_ACTIONS = 4
 RENDERING = False
 WINDOWED_MODE = True
 
+agent = Agent()
 env = Environment(RENDERING, WINDOWED_MODE)
-ship, rocks, done = env.reset()
+ship, rocks, score, done = env.reset()
 
 while not done:
-    action = random.randrange(NUMBER_OF_ACTIONS)
+    action = agent.getBestAction(ship, rocks)
     ship, rocks, score, done = env.step(action)
 
 print("Final Score: " + str(score))

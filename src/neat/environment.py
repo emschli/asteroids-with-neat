@@ -33,7 +33,7 @@ class Environment:
 
     def reset(self):
         self.initialiseGame()
-        return self.ship, self.rockList, False
+        return self.ship, self.rockList, self.score, False
 
     # 0 -> left, 1 -> right, 2 -> dash, 3 -> fire
     def step(self, action):
