@@ -5,7 +5,7 @@ RENDERING = False
 WINDOWED_MODE = True
 
 agent = Agent()
-env = Environment(RENDERING, WINDOWED_MODE)
+env = Environment(RENDERING, windowed=WINDOWED_MODE)
 ship, rocks, score, done = env.reset()
 
 while not done:

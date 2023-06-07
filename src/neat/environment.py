@@ -18,9 +18,10 @@ class Environment:
     WIDTH = 1024
     HEIGHT = 768
 
-    def __init__(self, rendering, windowed=True):
+    def __init__(self, rendering, seed=42, windowed=True):
         self.rendering = rendering
         self.stage = Stage(rendering, windowed, 'Atari Asteroids', (self.WIDTH, self.HEIGHT))
+        self.seed = seed
 
         self.numRocks = 3
         self.rockList = []
@@ -32,6 +33,7 @@ class Environment:
             self.clock = pygame.time.Clock()
 
     def reset(self):
+        random.seed(self.seed)
         self.initialiseGame()
         return self.ship, self.rockList, self.score, False
 
@@ -51,6 +53,9 @@ class Environment:
         self.render()
 
         return self.ship, self.rockList, self.score, done
+
+    def setSeed(self, seed):
+        self.seed = seed
 
     def render(self):
         if self.rendering:
