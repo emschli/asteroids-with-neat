@@ -1,7 +1,7 @@
 from environment import Environment
 from agent import Agent
 
-RENDERING = False
+RENDERING = True
 WINDOWED_MODE = True
 
 agent = Agent()
