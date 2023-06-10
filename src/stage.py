@@ -65,6 +65,12 @@ class Stage:
                 pygame.draw.rect(self.screen, (255, 255, 255),
                                  sprite.boundingRect, 1)
 
+    def drawPoint(self, point):
+        pygame.draw.circle(self.screen, (255, 0, 0), point, 2)
+
+    def drawLine(self, start, end):
+        pygame.draw.line(self.screen, (255, 0, 0), start, end)
+
     def moveSprites(self):
         for sprite in self.spriteList:
             sprite.move()

@@ -4,14 +4,14 @@
 # or the experiment itself.  This is the only required section.
 [NEAT]
 fitness_criterion     = max
-fitness_threshold     = 1.0
-pop_size              = 250
+fitness_threshold     = 100000
+pop_size              = 50
 reset_on_extinction   = True
 #no_fitness_termination = True
 
 [DefaultGenome]
-num_inputs              = 9
-num_hidden              = 4
+num_inputs              = 3
+num_hidden              = 1
 num_outputs             = 4
 initial_connection      = partial_direct 0.5
 #recurrent allowed

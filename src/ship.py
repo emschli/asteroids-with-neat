@@ -63,6 +63,10 @@ class Ship(Shooter):
 
         return self.transformedPointlist
 
+    def getTransformedAngle(self):
+        transformed_angle = self.angle % 360
+        return (transformed_angle / 180) * math.pi
+
     def rotateLeft(self):
         self.angle += self.turnAngle
         self.thrustJet.angle += self.turnAngle

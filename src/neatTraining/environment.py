@@ -1,6 +1,8 @@
+import math
 import random
 import sys
 
+import numpy
 import pygame
 from pygame.locals import *
 
@@ -17,8 +19,12 @@ class WrongActionException(Exception):
 class Environment:
     WIDTH = 1024
     HEIGHT = 768
+    GAME_SPEED = 1
 
-    def __init__(self, rendering, seed=42, windowed=True):
+    RED = (255, 0, 0)
+    WHITE = (255, 255, 255)
+
+    def __init__(self, rendering, seed=42, windowed=True, debug=False):
         self.rendering = rendering
         self.stage = Stage(rendering, windowed, 'Atari Asteroids', (self.WIDTH, self.HEIGHT))
         self.seed = seed
@@ -31,6 +37,7 @@ class Environment:
 
         if rendering:
             self.clock = pygame.time.Clock()
+            self.debug = debug
 
     def reset(self):
         random.seed(self.seed)
@@ -57,6 +64,41 @@ class Environment:
     def setSeed(self, seed):
         self.seed = seed
 
+    def setDebugInfo(self, closestRock, directionOfShip, angle):
+        self.closestRock = closestRock
+        self.directionOfShip = directionOfShip
+        self.angle = angle
+
+    def drawDebugInfo(self):
+        for rock in self.rockList:
+            if rock is self.closestRock:
+                rock.color = self.RED
+            else:
+                rock.color = self.WHITE
+
+        ship_tip = self.ship.transformedPointlist[0]
+        self.stage.drawLine(ship_tip, (self.closestRock.position.x, self.closestRock.position.y))
+
+        direction = numpy.array(ship_tip) + numpy.array(self.directionOfShip)
+        self.stage.drawLine(ship_tip, direction)
+
+        #show angleText
+        font1 = pygame.font.SysFont('arial', 10)
+        angleStr = str("{:10.2f}".format(self.angle / math.pi))
+        angleText = font1.render(angleStr, True, self.RED)
+        x = ship_tip[0] + 20
+        y = ship_tip[1]
+        scoreTextRect = angleText.get_rect(centerx=x, centery=y)
+        self.stage.screen.blit(angleText, scoreTextRect)
+         # show ship angle
+        font1 = pygame.font.SysFont('arial', 10)
+        angleStr = str("{:10.2f}".format(self.ship.getTransformedAngle() / math.pi))
+        angleText = font1.render(angleStr, True, self.RED)
+        x = self.ship.position.x - 10
+        y = self.ship.position.y
+        scoreTextRect = angleText.get_rect(centerx=x, centery=y)
+        self.stage.screen.blit(angleText, scoreTextRect)
+
     def render(self):
         if self.rendering:
             for event in pygame.event.get():
@@ -67,9 +109,11 @@ class Environment:
                         sys.exit(0)
                 else:
                     pass
-            self.clock.tick(60)
+            self.clock.tick(self.GAME_SPEED)
             self.stage.screen.fill((10, 10, 10))
             self.stage.drawSprites()
+            if self.debug:
+                self.drawDebugInfo()
             self.displayScore()
             pygame.display.flip()
         else:
