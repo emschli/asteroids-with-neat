@@ -1,3 +1,6 @@
+import pickle
+import neat
+
 from calculations import *
 
 
@@ -21,3 +24,11 @@ class Agent:
     def setInfo(self, ship, rocks):
         self.closestRock, self.distanceToClosestRock = getClosestRock(ship, rocks)
         self.angleToClosestRock, self.vectorShipHeading = getAngle(ship, self.closestRock)
+
+    @staticmethod
+    def loadFromFile(pathToFile):
+        config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
+                             neat.DefaultSpeciesSet, neat.DefaultStagnation,
+                             'neat-config')
+        net = neat.nn.FeedForwardNetwork.create(pickle.load(open(pathToFile, "rb")), config)
+        return Agent(net)
