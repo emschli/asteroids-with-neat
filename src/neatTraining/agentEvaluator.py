@@ -27,15 +27,3 @@ class AgentEvaluator:
             scores.append(score)
 
         return scores
-
-
-if __name__ == "__main__":
-    from agent import Agent
-    import statistics
-
-    num_of_games = 10
-    agent1 = Agent()
-    evaluator = AgentEvaluator(num_of_games)
-    results = evaluator.evaluate(agent1)
-    mean = statistics.mean(results)
-    print("Random Agent got Mean Score of " + str(mean) + " over " + str(num_of_games) + " Games")

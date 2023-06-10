@@ -19,7 +19,7 @@ class WrongActionException(Exception):
 class Environment:
     WIDTH = 1024
     HEIGHT = 768
-    GAME_SPEED = 1
+    GAME_SPEED = 10
 
     RED = (255, 0, 0)
     WHITE = (255, 255, 255)
@@ -64,10 +64,11 @@ class Environment:
     def setSeed(self, seed):
         self.seed = seed
 
-    def setDebugInfo(self, closestRock, directionOfShip, angle):
+    def setDebugInfo(self, closestRock, directionOfShip, angle, distanceToClosestRock):
         self.closestRock = closestRock
         self.directionOfShip = directionOfShip
         self.angle = angle
+        self.distanceToClosestRock = distanceToClosestRock
 
     def drawDebugInfo(self):
         for rock in self.rockList:
@@ -93,6 +94,7 @@ class Environment:
          # show ship angle
         font1 = pygame.font.SysFont('arial', 10)
         angleStr = str("{:10.2f}".format(self.ship.getTransformedAngle() / math.pi))
+        # angleStr = str("{:10.2f}".format(self.distanceToClosestRock))
         angleText = font1.render(angleStr, True, self.RED)
         x = self.ship.position.x - 10
         y = self.ship.position.y
