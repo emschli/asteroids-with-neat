@@ -49,6 +49,10 @@ population.add_reporter(stats)
 winner = population.run(parallel.evaluate, GENERATIONS)
 
 # Evolution Done
+pickle.dump(winner, open(folder + "/winner.net", "wb"))
+pickle.dump(stats, open(folder + "/stats", "wb"))
+
+# Show Game with winner
 net = neat.nn.FeedForwardNetwork.create(winner, config)
 agent = Agent(net)
 
@@ -60,6 +64,3 @@ while not done:
     ship, rocks, score, done = env.step(action)
 
 print("Final Score: " + str(score))
-
-pickle.dump(winner, open(folder + "/winner.net", "wb"))
-pickle.dump(stats, open(folder + "/stats", "wb"))

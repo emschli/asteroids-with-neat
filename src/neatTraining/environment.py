@@ -24,7 +24,7 @@ class Environment:
     RED = (255, 0, 0)
     WHITE = (255, 255, 255)
 
-    def __init__(self, rendering, seed=42, windowed=True, debug=False):
+    def __init__(self, rendering, seed=42, windowed=True, debug=False, generationsMode=False):
         self.rendering = rendering
         self.stage = Stage(rendering, windowed, 'Atari Asteroids', (self.WIDTH, self.HEIGHT))
         self.seed = seed
@@ -35,9 +35,12 @@ class Environment:
         self.ship = None
         self.lives = 1
 
+        self.next = False
+
         if rendering:
             self.clock = pygame.time.Clock()
             self.debug = debug
+            self.generationsMode = generationsMode
 
     def reset(self):
         random.seed(self.seed)
@@ -58,6 +61,10 @@ class Environment:
             self.levelUp()
 
         self.render()
+
+        if self.next:
+            done = True
+            self.next = False
 
         return self.ship, self.rockList, self.score, done
 
@@ -109,6 +116,9 @@ class Environment:
                 elif event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
                         sys.exit(0)
+                    elif event.key == K_RIGHT:
+                        self.next = True
+                        return
                 else:
                     pass
             self.clock.tick(self.GAME_SPEED)
@@ -124,6 +134,13 @@ class Environment:
     def initialiseGame(self):
         [self.stage.removeSprite(sprite)
          for sprite in self.rockList]
+
+        if self.ship:
+            try:
+                self.stage.removeSprite(self.ship.thrustJet)
+                self.stage.removeSprite(self.ship)
+            except:
+                pass
 
         self.createNewShip()
         self.score = 0
