@@ -1,5 +1,6 @@
 import pickle
 import neat
+import os
 
 from calculations import *
 
@@ -26,9 +27,15 @@ class Agent:
         self.angleToClosestRock, self.vectorShipHeading = getAngle(ship, self.closestRock)
 
     @staticmethod
-    def loadFromFile(pathToFile):
+    def loadFromFile(pathToNet, pathToConfig=None):
+        if pathToConfig is None:
+            folder = os.path.dirname(pathToNet)
+            path_to_config = folder + "/neat-config"
+        else:
+            path_to_config = pathToConfig
+
         config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                              neat.DefaultSpeciesSet, neat.DefaultStagnation,
-                             'neat-config')
-        net = neat.nn.FeedForwardNetwork.create(pickle.load(open(pathToFile, "rb")), config)
+                             path_to_config)
+        net = neat.nn.FeedForwardNetwork.create(pickle.load(open(pathToNet, "rb")), config)
         return Agent(net)
