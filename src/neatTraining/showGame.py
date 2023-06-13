@@ -1,7 +1,13 @@
 from environment import Environment
 from agent import Agent
+from get_project_root import root_path
 
-agent = Agent.loadFromFile("winner.net", "/home/mirjam/Nextcloud/Uni/S7/Evolutionäre Algorithmen/Prüfung/code/asteroids/src/neatTraining/neat-config")
+BASE_PATH = root_path(ignore_cwd=True) + "/resources/trainingResults/"
+RUN_FOLDER = "v1_no_simultaneous_actions/"
+NET_NAME = "winner.net"
+COMPLETE_PATH = BASE_PATH + RUN_FOLDER + NET_NAME
+
+agent = Agent.loadFromFile(COMPLETE_PATH)
 env = Environment(True, windowed=True, debug=True)
 
 steps = 0

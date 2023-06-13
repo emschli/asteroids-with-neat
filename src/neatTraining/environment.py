@@ -35,15 +35,18 @@ class Environment:
         self.ship = None
         self.lives = 1
 
+        # Stuff für showBestForEachGeneration
         self.next = False
+        self.numberOfCurrentGeneration = 0
+        self.generationsMode = generationsMode
 
         if rendering:
             self.clock = pygame.time.Clock()
             self.debug = debug
-            self.generationsMode = generationsMode
 
     def reset(self):
         random.seed(self.seed)
+        self.numberOfCurrentGeneration += 1
         self.initialiseGame()
         return self.ship, self.rockList, self.score, False
 
@@ -71,6 +74,9 @@ class Environment:
     def setSeed(self, seed):
         self.seed = seed
 
+    def setNumberOfGenerations(self, numberOfGenerations):
+        self.numberOfGenerations = numberOfGenerations
+
     def setDebugInfo(self, closestRock, directionOfShip, angle, distanceToClosestRock):
         self.closestRock = closestRock
         self.directionOfShip = directionOfShip
@@ -78,6 +84,8 @@ class Environment:
         self.distanceToClosestRock = distanceToClosestRock
 
     def drawDebugInfo(self):
+        assert self.closestRock and self.angle and self.distanceToClosestRock, "If debug == True, setDebugInfo must be called!"
+
         for rock in self.rockList:
             if rock is self.closestRock:
                 rock.color = self.RED
@@ -90,7 +98,7 @@ class Environment:
         direction = numpy.array(ship_tip) + numpy.array(self.directionOfShip) * 2
         self.stage.drawLine(ship_tip, direction)
 
-        #show angleText
+        #show angle to closest rock
         font1 = pygame.font.SysFont('arial', 12)
         angleStr = str("{:10.2f}".format(self.angle / math.pi))
         angleText = font1.render(angleStr, True, self.RED)
@@ -107,6 +115,17 @@ class Environment:
         y = self.ship.position.y
         scoreTextRect = angleText.get_rect(centerx=x, centery=y)
         self.stage.screen.blit(angleText, scoreTextRect)
+
+        if self.generationsMode:
+            #wer spielt gerade ?
+            assert self.numberOfGenerations, "If generationsMode == True, setNumberOfGenerations must be called once!"
+            font1 = pygame.font.Font('../../res/Hyperspace.otf', 30)
+            generations_str = '{} of {}'.format(self.numberOfCurrentGeneration, self.numberOfGenerations)
+            generations_text = font1.render(generations_str, True, self.RED)
+            x = self.WIDTH / 2
+            y = 45
+            generations_str_rect = generations_text.get_rect(centerx=x, centery=y)
+            self.stage.screen.blit(generations_text, generations_str_rect)
 
     def render(self):
         if self.rendering:
