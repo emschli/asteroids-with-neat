@@ -7,7 +7,7 @@ from agent import Agent
 BASE_PATH = root_path(ignore_cwd=True) + "/resources/trainingResults/"
 PATH = BASE_PATH + "v1_no_simultaneous_actions/"
 
-generations = len(os.listdir(PATH)) - 3
+generations = len(os.listdir(PATH)) - 4
 
 env = Environment(True, windowed=True, debug=True, generationsMode=True)
 env.setNumberOfGenerations(generations)

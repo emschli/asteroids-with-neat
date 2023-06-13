@@ -1,4 +1,5 @@
 import warnings
+import pickle
 
 import graphviz
 import matplotlib.pyplot as plt
@@ -16,10 +17,14 @@ def plot_stats(statistics, ylog=False, view=False, filename='avg_fitness.svg'):
     avg_fitness = np.array(statistics.get_fitness_mean())
     stdev_fitness = np.array(statistics.get_fitness_stdev())
 
-    plt.plot(generation, avg_fitness, 'b-', label="average")
-    plt.plot(generation, avg_fitness - stdev_fitness, 'g-.', label="-1 sd")
-    plt.plot(generation, avg_fitness + stdev_fitness, 'g-.', label="+1 sd")
-    plt.plot(generation, best_fitness, 'r-', label="best")
+    _, ax = plt.subplots()
+    ax.plot(generation, avg_fitness, 'b-', label="average")
+    ax.plot(generation, avg_fitness - stdev_fitness, 'g-.', label="-1 sd")
+    ax.plot(generation, avg_fitness + stdev_fitness, 'g-.', label="+1 sd")
+    ax.plot(generation, best_fitness, 'r-', label="best")
+
+    ylabels = ['{:,.0f}'.format(x) + 'K' for x in ax.get_yticks() / 1000]
+    ax.set_yticklabels(ylabels)
 
     plt.title("Population's average and best fitness")
     plt.xlabel("Generations")
@@ -179,3 +184,9 @@ def draw_net(config, genome, view=False, filename=None, node_names=None, show_di
     dot.render(filename, view=view)
 
     return dot
+
+# Fürs nachbessern
+if __name__ == "__main__":
+    folder = "/home/mirjam/Nextcloud/Uni/S7/Evolutionäre Algorithmen/Prüfung/code/asteroids/resources/trainingResults/v1_no_simultaneous_actions/"
+    stats = pickle.load(open(folder+"stats", "rb"))
+    plot_stats(stats, filename=folder+"avg_fitness.svg")
