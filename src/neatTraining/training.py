@@ -52,7 +52,7 @@ winner = population.run(parallel.evaluate, GENERATIONS)
 # Evolution Done
 pickle.dump(winner, open(folder + "/winner.net", "wb"))
 pickle.dump(stats, open(folder + "/stats", "wb"))
-plot_stats(stats, folder + "avg_fitness.svg")
+plot_stats(stats, filename=folder + "/avg_fitness.svg")
 
 # Show Game with winner
 net = neat.nn.FeedForwardNetwork.create(winner, config)
