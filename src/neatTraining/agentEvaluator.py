@@ -4,6 +4,7 @@ from environment import Environment
 
 
 class AgentEvaluator:
+    highestStepCountSoFar = 0
 
     def __init__(self, numberOfGames, maxSteps):
         self.env = Environment(False)
@@ -28,5 +29,8 @@ class AgentEvaluator:
                 steps += 1
 
             scores.append(score)
+            if steps > self.highestStepCountSoFar:
+                self.highestStepCountSoFar = steps
+                print("New Highest Step Count: {}".format(self.highestStepCountSoFar))
 
         return scores
