@@ -51,8 +51,8 @@ class Environment:
         return self.ship, self.rockList, self.score, False
 
     # 0 -> left, 1 -> right, 2 -> dash, 3 -> fire
-    def step(self, action):
-        self.processInput(action)
+    def step(self, actions):
+        self.processInput(actions)
 
         self.stage.moveSprites()
 
@@ -185,9 +185,13 @@ class Environment:
         self.stage.addSprite(self.ship.thrustJet)
         self.stage.addSprite(self.ship)
 
-    def processInput(self, action):
+    def processInput(self, actions):
         self.ship.thrustJet.accelerating = False
 
+        for action in actions:
+            self.doSingleAction(action)
+
+    def doSingleAction(self, action):
         if action == 3:
             self.ship.fireBullet()
         elif action == 2:

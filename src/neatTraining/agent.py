@@ -1,12 +1,14 @@
 import pickle
 import neat
 import os
+import random
 
 from calculations import *
 
 
 class Agent:
     NUMBER_OF_ACTIONS = 4
+    ACTIONS = [0, 1, 2, 3]
 
     def __init__(self, net):
         self.net = net
@@ -20,7 +22,27 @@ class Agent:
 
         inputs = (self.angleToClosestRock, self.distanceToClosestRock, ship.getTransformedAngle())
         outputs = self.net.activate(inputs)
-        return outputs.index(max(outputs))
+
+        result = []
+        for i, output in enumerate(outputs):
+            if output > 1:
+                result.append(i)
+
+        if 0 in result and 1 in result:
+            output_left = outputs[0]
+            output_right = outputs[1]
+
+            if output_left > output_right:
+                result.remove(1)
+            elif output_left < output_right:
+                result.remove(0)
+            else:
+                r = random.random()
+                if r > 0.5:
+                    result.remove(0)
+                else:
+                    result.remove(1)
+        return result
 
     def setInfo(self, ship, rocks):
         self.closestRock, self.distanceToClosestRock = getClosestRock(ship, rocks)
