@@ -16,9 +16,9 @@ from examples.visualize import *
 
 SAVE_FOLDER = root_path(ignore_cwd=True) + "/resources/trainingResults/"
 
-NUMBER_OF_GAMES = 1
+NUMBER_OF_GAMES = 5
 GENERATIONS = 100
-MAX_STEPS = 30_000
+MAX_STEPS = 1_000_000
 
 evaluator = AgentEvaluator(NUMBER_OF_GAMES, MAX_STEPS)
 timestamp = datetime.now().strftime("%m|%d|%Y|%H:%M:%S")
