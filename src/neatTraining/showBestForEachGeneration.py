@@ -8,7 +8,7 @@ from agent import Agent
 TO_EXCLUDE = ["winner.net", "avg_fitness.svg", "neat-config", "stats", "info"]
 
 BASE_PATH = root_path(ignore_cwd=True) + "/resources/trainingResults/"
-PATH = BASE_PATH + "v2_best/"
+PATH = BASE_PATH + "06|15|2023|09:14:10/"
 
 files = [file for file in os.listdir(PATH) if file not in TO_EXCLUDE]
 generations = len(files)
@@ -20,6 +20,10 @@ for generation in range(generations):
     filename = str(generation) + ".net"
     agent = Agent.loadFromFile(PATH + filename)
     ship, rocks, score, done = env.reset()
+    agent.setInfo(ship, rocks)
+    env.setDebugInfo(agent.closestRock, agent.vectorShipHeading, agent.angleToClosestRock,
+                     agent.distanceToClosestRock)
+    env.step([])
     print("Showing Best of Generation " + str(generation))
 
     while True:

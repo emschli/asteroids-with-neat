@@ -4,7 +4,7 @@ from get_project_root import root_path
 from readStats import getNameOfBestNetEver
 
 BASE_PATH = root_path(ignore_cwd=True) + "/resources/trainingResults/"
-RUN_FOLDER = "v2_best/"
+RUN_FOLDER = "06|15|2023|09:14:10/"
 # NET_NAME = "winner.net"
 NET_NAME = getNameOfBestNetEver(BASE_PATH+RUN_FOLDER)
 
@@ -16,6 +16,10 @@ env = Environment(True, windowed=True, debug=True)
 steps = 0
 env.setSeed(1235)
 ship, rocks, score, done = env.reset()
+agent.setInfo(ship, rocks)
+env.setDebugInfo(agent.closestRock, agent.vectorShipHeading, agent.angleToClosestRock, agent.distanceToClosestRock)
+env.step([])
+
 while not done:
     action = agent.getBestAction(ship, rocks)
     env.setDebugInfo(agent.closestRock, agent.vectorShipHeading, agent.angleToClosestRock, agent.distanceToClosestRock)

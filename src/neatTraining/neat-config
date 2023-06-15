@@ -10,7 +10,7 @@ reset_on_extinction   = True
 #no_fitness_termination = True
 
 [DefaultGenome]
-num_inputs              = 3
+num_inputs              = 6
 num_hidden              = 1
 num_outputs             = 4
 initial_connection      = partial_direct 0.5

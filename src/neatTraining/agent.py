@@ -12,15 +12,23 @@ class Agent:
 
     def __init__(self, net):
         self.net = net
+        self.vectorShipHeading = None
+
         self.closestRock = None
         self.angleToClosestRock = None
         self.distanceToClosestRock = None
-        self.vectorShipHeading = None
+
+        self.closestRockOld = None
+        self.angleToClosestRockOld = None
+        self.distanceToClosestRockOld = None
+
+        self.twoValuesPresent = False
 
     def getBestAction(self, ship, rocks):
         self.setInfo(ship, rocks)
 
-        inputs = (self.angleToClosestRock, self.distanceToClosestRock, ship.getTransformedAngle())
+        inputs = (self.angleToClosestRock, self.distanceToClosestRock, ship.getTransformedAngle(),
+                  self.angleToClosestRockOld, self.distanceToClosestRockOld, int(self.twoValuesPresent))
         outputs = self.net.activate(inputs)
 
         result = []
@@ -45,7 +53,16 @@ class Agent:
         return result
 
     def setInfo(self, ship, rocks):
+        self.closestRockOld = self.closestRock
+        self.distanceToClosestRockOld = self.distanceToClosestRock
         self.closestRock, self.distanceToClosestRock = getClosestRock(ship, rocks)
+
+        if self.closestRock is self.closestRockOld:
+            self.twoValuesPresent = True
+        else:
+            self.twoValuesPresent = False
+
+        self.angleToClosestRockOld = self.angleToClosestRock
         self.angleToClosestRock, self.vectorShipHeading = getAngle(ship, self.closestRock)
 
     @staticmethod

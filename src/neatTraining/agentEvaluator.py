@@ -21,8 +21,10 @@ class AgentEvaluator:
         for i in range(self.numberOfGames):
             self.env.setSeed(self.seeds[i])
             ship, rocks, score, done = self.env.reset()
+            agent.setInfo(ship, rocks)
+            self.env.step([])
 
-            steps = 0
+            steps = 1
             while not done and steps < self.maxSteps:
                 action = agent.getBestAction(ship, rocks)
                 ship, rocks, score, done = self.env.step(action)
