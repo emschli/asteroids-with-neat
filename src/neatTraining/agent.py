@@ -28,7 +28,7 @@ class Agent:
         self.setInfo(ship, rocks)
 
         inputs = (self.angleToClosestRock, self.distanceToClosestRock, ship.getTransformedAngle(),
-                  self.angleToClosestRockOld, self.distanceToClosestRockOld, int(self.twoValuesPresent))
+                  self.angleToClosestRockOld, self.distanceToClosestRockOld, float(self.twoValuesPresent))
         outputs = self.net.activate(inputs)
 
         result = []
