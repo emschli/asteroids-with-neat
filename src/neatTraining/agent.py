@@ -1,14 +1,18 @@
+import math
 import pickle
 import neat
 import os
 import random
 
 from calculations import *
+from environment import Environment
 
 
 class Agent:
     NUMBER_OF_ACTIONS = 4
     ACTIONS = [0, 1, 2, 3]
+
+    MAX_DISTANCE = math.sqrt(Environment.WIDTH**2 + Environment.HEIGHT**2)
 
     def __init__(self, net):
         self.net = net
@@ -29,8 +33,14 @@ class Agent:
     def getBestAction(self, ship, rocks):
         self.setInfo(ship, rocks)
 
-        inputs = (self.angleToClosestRock, self.distanceToClosestRock, self.shipAngle,
-                  self.angleToClosestRockOld, self.distanceToClosestRockOld, self.oldShipAngle, float(self.twoValuesPresent))
+        inputs = (self.angleToClosestRock,
+                  self.distanceToClosestRock / self.MAX_DISTANCE,
+                  self.shipAngle,
+                  self.angleToClosestRockOld,
+                  self.distanceToClosestRockOld / self.MAX_DISTANCE,
+                  self.oldShipAngle,
+                  float(self.twoValuesPresent)
+                  )
         outputs = self.net.activate(inputs)
 
         result = []
