@@ -4,7 +4,7 @@ from get_project_root import root_path
 from readStats import getNameOfBestNetEver
 
 BASE_PATH = root_path(ignore_cwd=True) + "/resources/trainingResults/"
-RUN_FOLDER = "06|15|2023|09:14:10/"
+RUN_FOLDER = "v3_with_old_ship_angle_more_hidden/"
 # NET_NAME = "winner.net"
 NET_NAME = getNameOfBestNetEver(BASE_PATH+RUN_FOLDER)
 

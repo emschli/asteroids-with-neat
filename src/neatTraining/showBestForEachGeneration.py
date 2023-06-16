@@ -8,7 +8,7 @@ from agent import Agent
 TO_EXCLUDE = ["winner.net", "avg_fitness.svg", "neat-config", "stats", "info"]
 
 BASE_PATH = root_path(ignore_cwd=True) + "/resources/trainingResults/"
-PATH = BASE_PATH + "06|15|2023|09:14:10/"
+PATH = BASE_PATH + "v3_with_old_ship_angle_more_hidden/"
 
 files = [file for file in os.listdir(PATH) if file not in TO_EXCLUDE]
 generations = len(files)

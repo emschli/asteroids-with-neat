@@ -60,6 +60,8 @@ agent = Agent(net)
 
 env = Environment(True, windowed=True)
 ship, rocks, score, done = env.reset()
+agent.setInfo(ship, rocks)
+env.step([])
 
 while not done:
     action = agent.getBestAction(ship, rocks)
