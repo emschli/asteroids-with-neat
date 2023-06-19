@@ -5,8 +5,8 @@ from readStats import getNameOfBestNetEver
 
 BASE_PATH = root_path(ignore_cwd=True) + "/resources/trainingResults/"
 RUN_FOLDER = "06|16|2023|14:16:59/"
-NET_NAME = "77.net"
-# NET_NAME = getNameOfBestNetEver(BASE_PATH+RUN_FOLDER)
+# NET_NAME = "winner.net"
+NET_NAME = getNameOfBestNetEver(BASE_PATH+RUN_FOLDER)
 
 COMPLETE_PATH = BASE_PATH + RUN_FOLDER + NET_NAME
 
