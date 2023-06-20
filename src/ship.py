@@ -15,7 +15,7 @@
 #    Copyright (C) 2008  Nick Redshaw
 #    Copyright (C) 2018  Francisco Sanchez Arroyo
 #
-
+import math
 import random
 from util.vectorsprites import *
 from shooter import *
@@ -32,7 +32,7 @@ class Ship(Shooter):
     turnAngle = 6
     bulletVelocity = 13.0
     maxBullets = 4
-    bulletTtl = 35
+    bulletTtl = 1_000_000_000
 
     def __init__(self, stage):
 

@@ -37,8 +37,8 @@ def get_pruned_genes(node_genes, connection_genes, input_keys, output_keys):
 
 
 BASE_PATH = root_path(ignore_cwd=True) + "/resources/trainingResults/"
-RUN_FOLDER = "v2_best/"
-NET_NAME = "winner.net"
+RUN_FOLDER = "06|19|2023|17:28:49/"
+NET_NAME = "90.net"
 
 COMPLETE_PATH = BASE_PATH + RUN_FOLDER + NET_NAME
 PATH_TO_CONFIG = BASE_PATH + RUN_FOLDER + "neat-config"
@@ -72,6 +72,7 @@ node_names_two_frames = {
     -5: 'distance closest rock (OLD)',
     -6: 'angle ship (OLD)',
     -7: 'two valid values',
+    -8: 'can shoot',
     0: 'LEFT',
     1: 'RIGHT',
     2: 'DASH',
@@ -79,5 +80,5 @@ node_names_two_frames = {
     }
 
 pruned_genome = get_pruned_copy(genome, config.genome_config)
-draw_net(config, pruned_genome, True, node_names=node_names_one_frame, show_disabled=False, filename=GRAPH_FILE)
-# draw_net(config, pruned_genome, True, node_names=node_names_two_frames, show_disabled=False, filename=GRAPH_FILE)
+# draw_net(config, pruned_genome, True, node_names=node_names_one_frame, show_disabled=False, filename=GRAPH_FILE)
+draw_net(config, pruned_genome, True, node_names=node_names_two_frames, show_disabled=False, filename=GRAPH_FILE)

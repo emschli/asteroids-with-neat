@@ -17,9 +17,9 @@ class WrongActionException(Exception):
 
 
 class Environment:
-    WIDTH = 1024
-    HEIGHT = 768
-    GAME_SPEED = 100
+    WIDTH = 900
+    HEIGHT = 600
+    GAME_SPEED = 60
 
     RED = (255, 0, 0)
     WHITE = (255, 255, 255)

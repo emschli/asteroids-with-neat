@@ -58,6 +58,19 @@ class Bullet(Point):
         self.velocity = velocity
 
     def move(self):
-        Point.move(self)
-        if (self.ttl <= 0):
+        VectorSprite.move(self)
+        # if (self.ttl <= 0):
+        #     self.shooter.bullets.remove(self)
+
+        if self.position.x < 0:
             self.shooter.bullets.remove(self)
+            self.stage.removeSprite(self)
+        elif self.position.x > self.stage.width:
+            self.shooter.bullets.remove(self)
+            self.stage.removeSprite(self)
+        elif self.position.y < 0:
+            self.shooter.bullets.remove(self)
+            self.stage.removeSprite(self)
+        elif self.position.y > self.stage.height:
+            self.shooter.bullets.remove(self)
+            self.stage.removeSprite(self)

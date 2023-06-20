@@ -5,7 +5,7 @@ from environment import Environment
 from agent import Agent
 
 # Filenames to exclude
-TO_EXCLUDE = ["winner.net", "avg_fitness.svg", "neat-config", "stats", "info"]
+TO_EXCLUDE = ["winner.net", "avg_fitness.svg", "neat-config", "stats", "info", "graph", "graph.svg"]
 
 BASE_PATH = root_path(ignore_cwd=True) + "/resources/trainingResults/"
 PATH = BASE_PATH + "v3_with_old_ship_angle_more_hidden/"

@@ -33,13 +33,16 @@ class Agent:
     def getBestAction(self, ship, rocks):
         self.setInfo(ship, rocks)
 
+        can_shoot = len(ship.bullets) < ship.maxBullets
+
         inputs = (self.angleToClosestRock,
                   self.distanceToClosestRock / self.MAX_DISTANCE,
                   self.shipAngle,
                   self.angleToClosestRockOld,
                   self.distanceToClosestRockOld / self.MAX_DISTANCE,
                   self.oldShipAngle,
-                  float(self.twoValuesPresent)
+                  float(self.twoValuesPresent),
+                  float(can_shoot)
                   )
         outputs = self.net.activate(inputs)
 
