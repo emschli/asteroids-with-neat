@@ -20,6 +20,7 @@ import random
 from util.vectorsprites import *
 from shooter import *
 from soundManager import *
+import copy
 
 # Four different shape of rock each of which can be small, medium or large.
 # Smaller rocks are faster.
@@ -87,10 +88,13 @@ class Rock(VectorSprite):
         
         # Original Asteroid didn't have spinning rocks but they look nicer
         self.angle += 1
-    
-    
+
 #    def destroyed(self):
-        
+    def getFutureRock(self):
+        next = copy.deepcopy(self)
+        next.move()
+        return next
+
 
 class Debris(Point):    
      

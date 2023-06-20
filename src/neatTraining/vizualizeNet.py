@@ -37,8 +37,8 @@ def get_pruned_genes(node_genes, connection_genes, input_keys, output_keys):
 
 
 BASE_PATH = root_path(ignore_cwd=True) + "/resources/trainingResults/"
-RUN_FOLDER = "06|19|2023|17:28:49/"
-NET_NAME = "90.net"
+RUN_FOLDER = "06|20|2023|13:28:49/"
+NET_NAME = "44.net"
 
 COMPLETE_PATH = BASE_PATH + RUN_FOLDER + NET_NAME
 PATH_TO_CONFIG = BASE_PATH + RUN_FOLDER + "neat-config"
@@ -67,12 +67,14 @@ node_names_one_frame = {
 node_names_two_frames = {
     -1: 'angle closest rock',
     -2: 'distance closest rock',
-    -3: 'angle ship',
-    -4: 'angle closest rock (OLD)',
-    -5: 'distance closest rock (OLD)',
-    -6: 'angle ship (OLD)',
-    -7: 'two valid values',
-    -8: 'can shoot',
+    -3: 'angle diff',
+    -4: 'distance diff',
+    # -3: 'angle ship',
+    # -4: 'angle closest rock (OLD)',
+    # -5: 'distance closest rock (OLD)',
+    # -6: 'angle ship (OLD)',
+    -5: 'two valid values',
+    -6: 'can shoot',
     0: 'LEFT',
     1: 'RIGHT',
     2: 'DASH',

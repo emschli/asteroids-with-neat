@@ -6,6 +6,7 @@ import random
 
 from calculations import *
 from environment import Environment
+import copy
 
 
 class Agent:
@@ -17,10 +18,16 @@ class Agent:
     def __init__(self, net):
         self.net = net
         self.vectorShipHeading = None
+        self.oldShipPointList = None
 
         self.closestRock = None
         self.angleToClosestRock = None
         self.distanceToClosestRock = None
+
+        # Movement Info
+        self.angleDiff = None
+        self.distanceDiff = None
+        self.futureAngle = None
 
         self.closestRockOld = None
         self.angleToClosestRockOld = None
@@ -37,12 +44,15 @@ class Agent:
 
         inputs = (self.angleToClosestRock,
                   self.distanceToClosestRock / self.MAX_DISTANCE,
-                  self.shipAngle,
-                  self.angleToClosestRockOld,
-                  self.distanceToClosestRockOld / self.MAX_DISTANCE,
-                  self.oldShipAngle,
-                  float(self.twoValuesPresent),
-                  float(can_shoot)
+                  # self.shipAngle,
+                  # self.angleToClosestRockOld,
+                  # self.distanceToClosestRockOld / self.MAX_DISTANCE,
+                  # self.oldShipAngle,
+                  # self.angleDiff,
+                  # self.distanceDiff / self.MAX_DISTANCE,
+                  # self.futureAngle,
+                  # float(self.twoValuesPresent),
+                  # float(can_shoot)
                   )
         outputs = self.net.activate(inputs)
 
@@ -68,6 +78,7 @@ class Agent:
         return result
 
     def setInfo(self, ship, rocks):
+        self.oldShipPointList = copy.deepcopy(ship.transformedPointlist)
         self.oldShipAngle = self.shipAngle
         self.shipAngle = ship.getTransformedAngle()
 
@@ -75,13 +86,21 @@ class Agent:
         self.distanceToClosestRockOld = self.distanceToClosestRock
         self.closestRock, self.distanceToClosestRock = getClosestRock(ship, rocks)
 
+        self.angleToClosestRockOld = self.angleToClosestRock
+        self.angleToClosestRock, self.vectorShipHeading = getAngle(ship.transformedPointlist, self.closestRock)
+
         if self.closestRock is self.closestRockOld:
             self.twoValuesPresent = True
+            new_angle, _ = getAngle(self.oldShipPointList, self.closestRock)
+            self.angleDiff = new_angle - self.angleToClosestRockOld
+            new_distance = getDistance(self.oldShipPointList[0], self.closestRock.position.asArray())
+            self.distanceDiff = self.distanceToClosestRockOld - new_distance
         else:
             self.twoValuesPresent = False
+            self.angleDiff = 0.0
+            self.distanceDiff = 0.0
 
-        self.angleToClosestRockOld = self.angleToClosestRock
-        self.angleToClosestRock, self.vectorShipHeading = getAngle(ship, self.closestRock)
+        self.futureAngle, _ = getAngle(ship.transformedPointlist, self.closestRock.getFutureRock())
 
     @staticmethod
     def loadFromFile(pathToNet, pathToConfig=None):

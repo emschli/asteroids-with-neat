@@ -24,3 +24,6 @@ class Vector2d:
         self.y = y
 
 # needs a copy constructor and method for vector addition etc
+
+    def asArray(self):
+        return [self.x, self.y]
