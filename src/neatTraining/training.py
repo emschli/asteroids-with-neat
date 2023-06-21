@@ -17,7 +17,7 @@ from examples.visualize import *
 SAVE_FOLDER = root_path(ignore_cwd=True) + "/resources/trainingResults/"
 
 NUMBER_OF_GAMES = 5
-GENERATIONS = 50
+GENERATIONS = 100
 MAX_STEPS = 3_600  # 1 Minute in Echtzeit
 
 evaluator = AgentEvaluator(NUMBER_OF_GAMES, MAX_STEPS)

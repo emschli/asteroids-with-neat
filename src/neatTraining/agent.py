@@ -1,4 +1,3 @@
-import math
 import pickle
 import neat
 import os
@@ -44,15 +43,15 @@ class Agent:
 
         inputs = (self.angleToClosestRock,
                   self.distanceToClosestRock / self.MAX_DISTANCE,
-                  # self.shipAngle,
-                  # self.angleToClosestRockOld,
-                  # self.distanceToClosestRockOld / self.MAX_DISTANCE,
-                  # self.oldShipAngle,
+                  self.shipAngle,
+                  self.angleToClosestRockOld,
+                  self.distanceToClosestRockOld / self.MAX_DISTANCE,
+                  self.oldShipAngle,
                   # self.angleDiff,
                   # self.distanceDiff / self.MAX_DISTANCE,
                   # self.futureAngle,
-                  # float(self.twoValuesPresent),
-                  # float(can_shoot)
+                  float(self.twoValuesPresent),
+                  float(can_shoot)
                   )
         outputs = self.net.activate(inputs)
 
@@ -78,7 +77,7 @@ class Agent:
         return result
 
     def setInfo(self, ship, rocks):
-        self.oldShipPointList = copy.deepcopy(ship.transformedPointlist)
+        # self.oldShipPointList = copy.deepcopy(ship.transformedPointlist)
         self.oldShipAngle = self.shipAngle
         self.shipAngle = ship.getTransformedAngle()
 
@@ -91,16 +90,16 @@ class Agent:
 
         if self.closestRock is self.closestRockOld:
             self.twoValuesPresent = True
-            new_angle, _ = getAngle(self.oldShipPointList, self.closestRock)
-            self.angleDiff = new_angle - self.angleToClosestRockOld
-            new_distance = getDistance(self.oldShipPointList[0], self.closestRock.position.asArray())
-            self.distanceDiff = self.distanceToClosestRockOld - new_distance
+            # new_angle, _ = getAngle(self.oldShipPointList, self.closestRock)
+            # self.angleDiff = new_angle - self.angleToClosestRockOld
+            # new_distance = getDistance(self.oldShipPointList[0], self.closestRock.position.asArray())
+            # self.distanceDiff = self.distanceToClosestRockOld - new_distance
         else:
             self.twoValuesPresent = False
             self.angleDiff = 0.0
             self.distanceDiff = 0.0
 
-        self.futureAngle, _ = getAngle(ship.transformedPointlist, self.closestRock.getFutureRock())
+        # self.futureAngle, _ = getAngle(ship.transformedPointlist, self.closestRock.getFutureRock())
 
     @staticmethod
     def loadFromFile(pathToNet, pathToConfig=None):
