@@ -5,13 +5,13 @@ from readStats import getNameOfBestNetEver
 
 BASE_PATH = root_path(ignore_cwd=True) + "/resources/trainingResults/"
 RUN_FOLDER = "v2_best/"
-# NET_NAME = "winner.net"
-NET_NAME = getNameOfBestNetEver(BASE_PATH+RUN_FOLDER)
+NET_NAME = "winner.net"
+# NET_NAME = getNameOfBestNetEver(BASE_PATH+RUN_FOLDER)
 
 COMPLETE_PATH = BASE_PATH + RUN_FOLDER + NET_NAME
 
 agent = Agent.loadFromFile(COMPLETE_PATH)
-env = Environment(True, windowed=True, debug=True)
+env = Environment(True, windowed=False, debug=True)
 
 steps = 0
 env.setSeed(1235)
