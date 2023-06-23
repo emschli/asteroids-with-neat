@@ -1,11 +1,17 @@
 from get_project_root import root_path
 from neat import DefaultGenome
 from neat.graphs import required_for_output
+import neat
 
 from examples.visualize import draw_net
 import neat
 import pickle
 import copy
+
+
+def getSampleStartingGenome(config, key=1):
+    population = neat.Population(config)
+    return population.population[key]
 
 
 def get_pruned_copy(genome, genome_config):
@@ -37,7 +43,7 @@ def get_pruned_genes(node_genes, connection_genes, input_keys, output_keys):
 
 
 BASE_PATH = root_path(ignore_cwd=True) + "/resources/trainingResults/"
-RUN_FOLDER = "06|20|2023|18:16:29/"
+RUN_FOLDER = "v2_best/"
 NET_NAME = "winner.net"
 
 COMPLETE_PATH = BASE_PATH + RUN_FOLDER + NET_NAME
@@ -49,10 +55,10 @@ config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                              neat.DefaultSpeciesSet, neat.DefaultStagnation,
                              PATH_TO_CONFIG)
 
-node_names_one_frame = {
+node_names_min_config = {
     -1: 'angle closest rock',
     -2: 'distance closest rock',
-    # -3: 'angle ship',
+    -3: 'angle ship',
     # -4: 'MIDDLE LEFT',
     # -5: 'MIDDLE RIGHT',
     # -6: 'bottom left',
@@ -82,5 +88,13 @@ node_names_two_frames = {
     }
 
 pruned_genome = get_pruned_copy(genome, config.genome_config)
-# draw_net(config, pruned_genome, True, node_names=node_names_one_frame, show_disabled=False, filename=GRAPH_FILE)
 draw_net(config, pruned_genome, True, node_names=node_names_two_frames, show_disabled=False, filename=GRAPH_FILE)
+
+# min_config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
+#                              neat.DefaultSpeciesSet, neat.DefaultStagnation,
+#                              "/home/mirjam/Nextcloud/Uni/S7/Evolutionäre Algorithmen/Prüfung/code/asteroids/resources/trainingResults/v2_best/neat-config")
+#
+# starting_genome = getSampleStartingGenome(min_config)
+# pruned_starting_genome = get_pruned_copy(starting_genome, min_config.genome_config)
+# draw_net(min_config, pruned_starting_genome, True, node_names=node_names_min_config, show_disabled=False, filename="min")
+
