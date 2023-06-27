@@ -47,8 +47,8 @@ class Agent:
                   self.angleToClosestRockOld,
                   self.distanceToClosestRockOld / self.MAX_DISTANCE,
                   self.oldShipAngle,
-                  self.angleDiff,
-                  self.distanceDiff / self.MAX_DISTANCE,
+                  # self.angleDiff,
+                  # self.distanceDiff / self.MAX_DISTANCE,
                   self.futureAngle,
                   float(self.twoValuesPresent),
                   float(can_shoot)
