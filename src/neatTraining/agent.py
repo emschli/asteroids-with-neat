@@ -44,14 +44,14 @@ class Agent:
         inputs = (self.angleToClosestRock,
                   self.distanceToClosestRock / self.MAX_DISTANCE,
                   self.shipAngle,
-                  # self.angleToClosestRockOld,
-                  # self.distanceToClosestRockOld / self.MAX_DISTANCE,
-                  # self.oldShipAngle,
-                  # self.angleDiff,
-                  # self.distanceDiff / self.MAX_DISTANCE,
-                  # self.futureAngle,
-                  # float(self.twoValuesPresent),
-                  # float(can_shoot)
+                  self.angleToClosestRockOld,
+                  self.distanceToClosestRockOld / self.MAX_DISTANCE,
+                  self.oldShipAngle,
+                  self.angleDiff,
+                  self.distanceDiff / self.MAX_DISTANCE,
+                  self.futureAngle,
+                  float(self.twoValuesPresent),
+                  float(can_shoot)
                   )
         outputs = self.net.activate(inputs)
 
