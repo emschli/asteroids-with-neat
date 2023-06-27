@@ -49,7 +49,7 @@ class Agent:
                   self.oldShipAngle,
                   # self.angleDiff,
                   # self.distanceDiff / self.MAX_DISTANCE,
-                  self.futureAngle,
+                  # self.futureAngle,
                   float(self.twoValuesPresent),
                   float(can_shoot)
                   )
