@@ -31,7 +31,7 @@ aggregation_mutate_rate = 0.0
 bias_init_mean          = 0.0
 bias_init_stdev         = 1.0
 bias_replace_rate       = 0.1
-bias_mutate_rate        = 0.7
+bias_mutate_rate        = 0.4
 bias_mutate_power       = 0.5
 bias_max_value          = 30.0
 bias_min_value          = -30.0
@@ -47,7 +47,7 @@ weight_max_value        = 30
 weight_min_value        = -30
 weight_init_mean        = 0.0
 weight_init_stdev       = 1.0
-weight_mutate_rate      = 0.9
+weight_mutate_rate      = 0.4
 weight_replace_rate     = 0.1
 weight_mutate_power     = 0.6
 enabled_default         = True
@@ -63,5 +63,5 @@ species_elitism = 1
 
 [DefaultReproduction]
 elitism            = 2
-survival_threshold = 0.15
+survival_threshold = 0.2
 
