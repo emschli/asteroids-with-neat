@@ -10,7 +10,7 @@ reset_on_extinction   = True
 #no_fitness_termination = True
 
 [DefaultGenome]
-num_inputs              = 8
+num_inputs              = 3
 num_hidden              = 1
 num_outputs             = 4
 initial_connection      = partial_direct 0.5
@@ -59,7 +59,7 @@ compatibility_threshold = 2.8
 [DefaultStagnation]
 species_fitness_func = max
 max_stagnation  = 15
-species_elitism = 1
+species_elitism = 0
 
 [DefaultReproduction]
 elitism            = 2

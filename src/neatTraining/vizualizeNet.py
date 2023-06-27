@@ -8,6 +8,8 @@ import neat
 import pickle
 import copy
 
+from readStats import getNameOfBestNetEver
+
 
 def getSampleStartingGenome(config, key=1):
     population = neat.Population(config)
@@ -43,8 +45,9 @@ def get_pruned_genes(node_genes, connection_genes, input_keys, output_keys):
 
 
 BASE_PATH = root_path(ignore_cwd=True) + "/resources/trainingResults/"
-RUN_FOLDER = "v2_best/"
-NET_NAME = "winner.net"
+RUN_FOLDER = "v5_final/"
+# NET_NAME = "winner.net"
+NET_NAME = getNameOfBestNetEver(BASE_PATH + RUN_FOLDER)
 
 COMPLETE_PATH = BASE_PATH + RUN_FOLDER + NET_NAME
 PATH_TO_CONFIG = BASE_PATH + RUN_FOLDER + "neat-config"
