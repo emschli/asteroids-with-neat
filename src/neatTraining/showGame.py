@@ -11,7 +11,7 @@ NET_NAME = "winner.net"
 COMPLETE_PATH = BASE_PATH + RUN_FOLDER + NET_NAME
 
 agent = Agent.loadFromFile(COMPLETE_PATH)
-env = Environment(True, windowed=False, debug=True)
+env = Environment(True, windowed=True, debug=True)
 
 steps = 0
 env.setSeed(1235)
