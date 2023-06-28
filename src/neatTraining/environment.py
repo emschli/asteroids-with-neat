@@ -92,29 +92,29 @@ class Environment:
             else:
                 rock.color = self.WHITE
 
-        ship_tip = self.ship.transformedPointlist[0]
-        self.stage.drawLine(ship_tip, (self.closestRock.position.x, self.closestRock.position.y))
-
-        direction = numpy.array(ship_tip) + numpy.array(self.directionOfShip) * 2
-        self.stage.drawLine(ship_tip, direction)
+        # ship_tip = self.ship.transformedPointlist[0]
+        # self.stage.drawLine(ship_tip, (self.closestRock.position.x, self.closestRock.position.y))
+        #
+        # direction = numpy.array(ship_tip) + numpy.array(self.directionOfShip) * 2
+        # self.stage.drawLine(ship_tip, direction)
 
         #show angle to closest rock
-        font1 = pygame.font.SysFont('arial', 12)
-        angleStr = str("{:10.2f}".format(self.angle / math.pi))
-        angleText = font1.render(angleStr, True, self.RED)
-        x = ship_tip[0] + 5
-        y = ship_tip[1] - 25
-        scoreTextRect = angleText.get_rect(centerx=x, centery=y)
-        self.stage.screen.blit(angleText, scoreTextRect)
-         # show ship angle
-        font1 = pygame.font.SysFont('arial', 12)
-        angleStr = str("{:10.2f}".format(self.ship.getTransformedAngle() / math.pi))
-        # angleStr = str("{:10.2f}".format(self.distanceToClosestRock))
-        angleText = font1.render(angleStr, True, self.RED)
-        x = self.ship.position.x - 30
-        y = self.ship.position.y
-        scoreTextRect = angleText.get_rect(centerx=x, centery=y)
-        self.stage.screen.blit(angleText, scoreTextRect)
+        # font1 = pygame.font.SysFont('arial', 12)
+        # angleStr = str("{:10.2f}".format(self.angle / math.pi))
+        # angleText = font1.render(angleStr, True, self.RED)
+        # x = ship_tip[0] + 5
+        # y = ship_tip[1] - 25
+        # scoreTextRect = angleText.get_rect(centerx=x, centery=y)
+        # self.stage.screen.blit(angleText, scoreTextRect)
+        #  # show ship angle
+        # font1 = pygame.font.SysFont('arial', 12)
+        # angleStr = str("{:10.2f}".format(self.ship.getTransformedAngle() / math.pi))
+        # # angleStr = str("{:10.2f}".format(self.distanceToClosestRock))
+        # angleText = font1.render(angleStr, True, self.RED)
+        # x = self.ship.position.x - 30
+        # y = self.ship.position.y
+        # scoreTextRect = angleText.get_rect(centerx=x, centery=y)
+        # self.stage.screen.blit(angleText, scoreTextRect)
 
         if self.generationsMode:
             #wer spielt gerade ?
